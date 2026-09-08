@@ -58,3 +58,47 @@ for vendedor in range(1, cantidad_vendedores + 1):
 print("\n===== RESUMEN POR VENDEDOR =====")
 print(resumen)
 
+# 💡 Solución alternativa: cargar de forma aleatoria los datos de tres vendedores
+
+from random import randint
+
+CANTIDAD_VENDEDORES = 3
+resumen = ""
+
+print("\n===== CARGA ALEATORIA DE 3 VENDEDORES =====")
+
+for vendedor in range(1, CANTIDAD_VENDEDORES + 1):
+    print(f"\n--- Carga de datos del vendedor {vendedor} ---")
+
+    total_vendido = 0
+    ventas_superaron = 0
+    ventas_no_superaron = 0
+    meses_sin_ventas = 0
+
+    for mes in range(1, MESES + 1):
+        monto = randint(0, 50000)
+        print(f"Mes {mes}: ${monto}")
+
+        total_vendido += monto
+
+        if monto > LIMITE:
+            ventas_superaron += 1
+        else:
+            ventas_no_superaron += 1
+
+        if monto == 0:
+            meses_sin_ventas += 1
+
+    resumen += f"\n--- Vendedor {vendedor} ---\n"
+    resumen += f"Monto total vendido: ${total_vendido}\n"
+    resumen += f"Tuvo {ventas_superaron} ventas que superaron los ${LIMITE}\n"
+    resumen += f"Tuvo {ventas_no_superaron} ventas que no superaron los ${LIMITE}\n"
+
+    if meses_sin_ventas == 0:
+        resumen += "Todos los meses registraron ventas\n"
+    else:
+        resumen += f"Hubo {meses_sin_ventas} mes(es) sin ventas\n"
+
+print("\n===== RESUMEN POR VENDEDOR =====")
+print(resumen)
+
