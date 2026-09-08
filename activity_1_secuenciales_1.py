@@ -12,6 +12,11 @@
 # Ingrese el valor del radio del círculo: 5
 # El área del círculo es: 78.53981633974483
 
+# Pedimos el radio y lo convertimos a entero para poder calcular
 input_radio = int(input("Ingrese el valor del radio del círculo: "))
+
+# Fórmula: Área = π * radio^2
+# 3.14159 es el valor aproximado de π; ** 2 eleva el radio al cuadrado
 area = 3.14159 * input_radio**2
+
 print(f"El área del círculo es: {area}")

@@ -19,32 +19,40 @@
 # - Diferencia en días: 9735
 # - Tengo 26 años
 
-import datetime
+import datetime  # módulo de la biblioteca estándar para fechas y horas
 
+# now() toma la fecha y hora del sistema en este momento
 ahora = datetime.datetime.now()
 print(f"Fecha actual: {ahora}")
 
+# datetime(año, mes, día) arma una fecha concreta (la hora queda en 00:00:00)
 fecha = datetime.datetime(1990, 1, 1)
 print(f"Fecha de nacimiento: {fecha}")
 
+# Restar dos datetime da un timedelta: días + horas + minutos + segundos
 diferencia = ahora - fecha
 print(f"Diferencia: {diferencia}")
 
+# .days se queda solo con la parte entera de días (descarta horas y minutos)
 diferenciaEnDias = diferencia.days
 print(f"Diferencia en días: {diferenciaEnDias}")
 
+# Dividimos por 365 para pasar de días a años e int() recorta los decimales
+# (es una edad aproximada: no contempla años bisiestos)
 anios = int(diferenciaEnDias / 365)
 print(f"Tengo {anios} años")
 
-# Alternativa: el usuario ingresa su fecha de nacimiento por teclado.
+# Alternativa: misma lógica, pero la fecha de nacimiento la carga el usuario
 
 ahora = datetime.datetime.now()
 print(f"Fecha actual: {ahora}")
 
+# Pedimos las tres partes por separado y las convertimos a entero
 anio_nacimiento = int(input("Ingrese el año de nacimiento: "))
 mes_nacimiento = int(input("Ingrese el mes de nacimiento: "))
 dia_nacimiento = int(input("Ingrese el día de nacimiento: "))
 
+# Armamos el datetime con los valores ingresados
 fecha = datetime.datetime(anio_nacimiento, mes_nacimiento, dia_nacimiento)
 print(f"Fecha de nacimiento: {fecha}")
 

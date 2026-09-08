@@ -28,20 +28,26 @@
 # El puntaje total es: 41
 # Ganaste
 
-from random import randint
+from random import randint  # para simular el dado (número al azar entre 1 y 6)
 
-dado = 0
-contador = 0
-puntaje = 0
+# Variables iniciales pedidas en la consigna
+dado = 0       # último valor que salió (se pisa en cada tirada)
+contador = 0   # cuántas tiradas llevamos (máximo 10)
+puntaje = 0    # suma acumulada de todas las caras
 
+# El while sigue mientras NO hayamos tirado 10 veces Y aún no llegamos a 38
+# Con "and": alcanza con que falle UNA condición para salir
+# - contador == 10 → se acabaron las tiradas
+# - puntaje >= 38  → ya ganamos, no hace falta seguir tirando
 while contador < 10 and puntaje < 38:
-    dado = randint(1, 6)
-    puntaje += dado
-    contador += 1
+    dado = randint(1, 6)   # cara del dado (1 a 6 inclusive)
+    puntaje += dado        # sumamos esa cara al total
+    contador += 1          # una tirada más
     print(f"Tirada {contador}: {dado}")
 
 print(f"El puntaje total es: {puntaje}")
 
+# Si al salir del while el total llegó a 38 o más, ganamos; si no, perdimos
 if puntaje >= 38:
     print("Ganaste")
 else:

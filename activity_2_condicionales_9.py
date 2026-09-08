@@ -15,6 +15,7 @@
 input_codigo = int(input("Ingrese el código del producto: "))
 input_cantidad = int(input("Ingrese la cantidad vendida: "))
 
+# El precio unitario depende del tramo del código (if/elif: entra en el PRIMERO que cumpla)
 if input_codigo >= 1 and input_codigo <= 25:
     input_precio_unitario = 277.7
 elif input_codigo >= 26 and input_codigo <= 50:
@@ -24,18 +25,22 @@ elif input_codigo >= 51 and input_codigo <= 75:
 elif input_codigo >= 76:
     input_precio_unitario = 210.5
 else:
+    # Código 0 o negativo: no hay producto, usamos 0 como marca de "inválido"
     input_precio_unitario = 0
 
 if input_precio_unitario == 0:
     print("El código del producto es incorrecto")
 else:
+    # Importe de la compra = precio de una unidad * cuántas se vendieron (SIN descuento)
     input_importe_compra = input_precio_unitario * input_cantidad
 
+    # Más de 50 unidades → 15%; 50 o menos → 5%
     if input_cantidad > 50:
         input_descuento = input_importe_compra * 0.15
     else:
         input_descuento = input_importe_compra * 0.05
 
+    # Lo que paga el cliente: importe menos el descuento
     input_importe_pagar = input_importe_compra - input_descuento
 
     print(f"El importe de la compra es: {input_importe_compra}")

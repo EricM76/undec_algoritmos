@@ -14,29 +14,39 @@
 # - // (DIV) para obtener el cociente de la división.
 # - % (MOD) para obtener el resto de la división.
 
+# Pedimos el primer número. Si es 0, el while no entra y el programa termina
 numero = int(input("Ingrese un número entero positivo (0 para finalizar): "))
 
+# El 0 es la marca de fin: mientras no se ingrese, seguimos procesando números
 while numero != 0:
+    # Los negativos no se analizan; se pide otro número al final del while
     if numero < 0:
         print("Número ingresado no válido")
     else:
+        # Guardamos una copia: "numero" se va a ir destrozando al sacarle cifras
         original = numero
         cifras = 0
-        invertido = ""  # texto para no perder ceros al invertir (ej: 120 → 021)
+        # Texto (no int) para no perder ceros al invertir (ej: 120 → "021")
+        invertido = ""
 
+        # Descomposición posicional: sacamos una cifra por vuelta hasta que quede 0
         while numero > 0:
-            digito = numero % 10          # última cifra (MOD), incluye ceros
-            invertido += str(digito)
-            numero = numero // 10         # quita la última cifra (DIV)
+            # % 10 (MOD) = última cifra. Ej: 7631 % 10 → 1
+            digito = numero % 10
+            invertido += str(digito)  # la vamos pegando de atrás hacia adelante
+            # // 10 (DIV) = quita esa última cifra. Ej: 7631 // 10 → 763
+            numero = numero // 10
             cifras += 1
 
         print(f"El número {original} tiene {cifras} cifra(s)")
         print(f"Invertido: {invertido}")
 
+        # Es capicúa si se lee igual de izquierda a derecha que al revés
         if str(original) == invertido:
             print(f"{original} es capicúa")
         else:
             print(f"{original} no es capicúa")
 
+    # Pedimos el siguiente número (o 0 para cortar). Va al final para no repetir el input
     numero = int(input("Ingrese un número entero positivo (0 para finalizar): "))
 

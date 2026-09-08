@@ -8,11 +8,14 @@
 # Al finalizar de procesar los datos debe determinar la ganancia obtenida y mostrar el resultado.
 # Nota: normalizar la cadena de caracteres correspondiente al tipo de uva antes de realizar las comparaciones.
 
+# strip() saca espacios; upper() pasa a mayúscula → " a " y "A" se comparan igual
 input_tipo = input("Ingrese el tipo de uva: ").strip().upper()
 input_tamaño = int(input("Ingrese el tamaño de la uva: "))
 input_precio_inicial = int(input("Ingrese el precio inicial de la uva: "))
 input_cantidad = int(input("Ingrese la cantidad de kilos de uva: "))
 
+# Primero discriminamos por TIPO (A o B) y adentro por TAMAÑO (1 o 2)
+# Tipo A: se SUMA al precio inicial / Tipo B: se RESTA
 if input_tipo == "A":
     if input_tamaño == 1:
         input_precio_final = input_precio_inicial + 200
@@ -30,12 +33,16 @@ elif input_tipo == "B":
 else:
     print("El tipo de uva es incorrecto")
 
+# Solo calculamos la ganancia si tipo y tamaño eran válidos
+# (si no, input_precio_final no existiría y el programa se rompería)
 if input_tipo == "A" or input_tipo == "B":
     if input_tamaño == 1 or input_tamaño == 2:
+        # ganancia = precio por kilo (ya ajustado) * kilos entregados
         input_ganancia = input_precio_final * input_cantidad
         print(f"La ganancia obtenida es: {input_ganancia}")
 
 # Alternativa 2 del algoritmo 10: tabla de ajustes con un diccionario.
+# Cada clave es un par (tipo, tamaño) y el valor es cuánto se suma o resta
 
 input_tipo = input("Ingrese el tipo de uva: ").strip().upper()
 input_tamaño = int(input("Ingrese el tamaño de la uva: "))
@@ -45,10 +52,11 @@ input_cantidad = int(input("Ingrese la cantidad de kilos de uva: "))
 input_ajustes = {
     ("A", 1): 200,
     ("A", 2): 300,
-    ("B", 1): -300,
+    ("B", 1): -300,  # negativo = rebaja
     ("B", 2): -500,
 }
 
+# Si el par ingresado está en la tabla, aplicamos el ajuste de un saque
 if (input_tipo, input_tamaño) in input_ajustes:
     input_precio_final = input_precio_inicial + input_ajustes[(input_tipo, input_tamaño)]
     input_ganancia = input_precio_final * input_cantidad

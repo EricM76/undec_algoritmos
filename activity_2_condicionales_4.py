@@ -8,20 +8,28 @@
 # - Aprobado: si aprobó los tres parciales con nota de 7 (siete) o más pero con promedio entre ellos de 8 (ocho) o más, y además obtuvo nota de 8 (ocho) o más en la nota final del práctico.
 # El programa debe determinar y mostrar por pantalla el estado en que finalmente quedó el estudiante.
 
+# Lista: [0][1][2] = los 3 parciales (0 = no rindió), [3] = nota final de TPs
 input_notas = [
-    int(input("Ingrese la nota del primer parcial: ")), 
-    int(input("Ingrese la nota del segundo parcial: ")), 
-    int(input("Ingrese la nota del tercer parcial: ")), 
+    int(input("Ingrese la nota del primer parcial: ")),
+    int(input("Ingrese la nota del segundo parcial: ")),
+    int(input("Ingrese la nota del tercer parcial: ")),
     int(input("Ingrese la nota final: "))]
 
+# Promedio SOLO de los tres parciales (la nota de TPs no entra acá)
 promedio_parciales = (input_notas[0] + input_notas[1] + input_notas[2]) / 3
+
+# True si ninguno quedó en 0 (rindió los tres)
 todos_parciales_rendidos = input_notas[0] != 0 and input_notas[1] != 0 and input_notas[2] != 0
+
+# True si hay al menos UN par de parciales con 4 o más (las 3 combinaciones posibles)
 al_menos_dos_con_cuatro = (
     (input_notas[0] >= 4 and input_notas[1] >= 4)
     or (input_notas[0] >= 4 and input_notas[2] >= 4)
     or (input_notas[1] >= 4 and input_notas[2] >= 4)
 )
 
+# El orden importa: Promocionado es más exigente que Aprobado.
+# Si preguntáramos Aprobado primero, un promedio de 9 también cumpliría (>= 8) y nunca veríamos Promocionado.
 if input_notas[0] >= 7 and input_notas[1] >= 7 and input_notas[2] >= 7 and promedio_parciales >= 9 and input_notas[3] >= 8:
     print("Promocionado")
 elif input_notas[0] >= 7 and input_notas[1] >= 7 and input_notas[2] >= 7 and promedio_parciales >= 8 and input_notas[3] >= 8:
@@ -29,4 +37,5 @@ elif input_notas[0] >= 7 and input_notas[1] >= 7 and input_notas[2] >= 7 and pro
 elif todos_parciales_rendidos and al_menos_dos_con_cuatro and input_notas[3] >= 4:
     print("Regular")
 else:
+    # No cumplió Regular ni nada superior → Libre
     print("Libre")

@@ -5,8 +5,13 @@
 # - Si está disponible, mostrar: "Sí, hay ____".
 # - Si no, mostrar: "No hay ____".
 
+# Pedimos el gusto tal cual lo escribe el usuario (sin normalizar)
 input_gusto = input("Ingrese su gusto de helado: ")
+
+# Con "or" alcanza con que coincida CON UNO de los 4 nombres
+# La comparación es exacta: "Chocolate" o "CHOCOLATE" no entran (mayúsculas distintas)
 if input_gusto == "chocolate" or input_gusto == "vainilla" or input_gusto == "frutilla" or input_gusto == "dulce de leche":
     print(f"Sí, hay {input_gusto}")
 else:
+    # No coincidió con ninguno de los disponibles
     print(f"No hay {input_gusto}")
